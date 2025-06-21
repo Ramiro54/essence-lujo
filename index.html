@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESSENCE - Perfumes de Lujo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+      color: white;
+      padding: 40px;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5em;
+      text-align: center;
+      color: #f1c40f;
+    }
+    .productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .producto {
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+    .producto img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+    .producto h3 {
+      margin: 0.5em 0;
+    }
+    .producto button {
+      background-color: #f1c40f;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    #carrito {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #f1c40f;
+      color: black;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <h1>ESSENCE</h1>
+  <div id="carrito">
+    Total: $<span id="total">0</span><br>
+    <small id="cup">(Cupón aplicado: $0)</small>
+  </div>
+  <div class="productos">
+    <div class="producto">
+      <img src="https://cdn-icons-png.flaticon.com/512/2921/2921822.png" alt="Perfume A">
+      <h3>Perfume A</h3>
+      <p>$2000</p>
+      <button onclick="agregar(2000)">Agregar</button>
+    </div>
+    <div class="producto">
+      <img src="https://cdn-icons-png.flaticon.com/512/2921/2921818.png" alt="Perfume B">
+      <h3>Perfume B</h3>
+      <p>$2500</p>
+      <button onclick="agregar(2500)">Agregar</button>
+    </div>
+    <div class="producto">
+      <img src="https://cdn-icons-png.flaticon.com/512/2921/2921825.png" alt="Perfume C">
+      <h3>Perfume C</h3>
+      <p>$1800</p>
+      <button onclick="agregar(1800)">Agregar</button>
+    </div>
+  </div>
+  <script>
+    let total = 0;
+    let cupon = 500;
+    let cuponUsado = false;
+    function agregar(precio) {
+      total += precio;
+      let descuento = (!cuponUsado && total >= cupon) ? cupon : 0;
+      if (descuento > 0) cuponUsado = true;
+      document.getElementById('total').textContent = total - descuento;
+      document.getElementById('cup').textContent = `(Cupón aplicado: $${descuento})`;
+    }
+  </script>
+</body>
+</html>
